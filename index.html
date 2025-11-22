@@ -1,93 +1,180 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Our Heroes – Standing With Combat Veterans</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Optional: modern web font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --bg-root: #0b1020;
+      --bg-elevated: #0f172a;
+      --bg-soft: #020617;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.1);
+      --accent-strong: #ea580c;
+      --border-subtle: #1f2937;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --text-soft: #d1d5db;
+      --pill-bg: rgba(15, 23, 42, 0.85);
+      --shadow-soft: 0 22px 60px rgba(15, 23, 42, 0.65);
+      --radius-xl: 24px;
+      --radius-md: 14px;
+      --radius-pill: 999px;
+      --nav-height: 68px;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
     }
 
     body {
-      background: #020617;
-      color: #e5e7eb;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background:
+        radial-gradient(circle at top left, #1f2937 0, transparent 55%),
+        radial-gradient(circle at bottom right, #111827 0, transparent 55%),
+        var(--bg-root);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
     }
 
-    a { color: inherit; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* -----------------------
+       Global Layout
+    ------------------------ */
+
+    .page-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px 32px;
+    }
 
     header {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(2, 6, 23, 0.97);
-      border-bottom: 1px solid #1f2937;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.92)
+      );
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
     }
 
     .nav {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 10px 18px;
+      height: var(--nav-height);
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 16px;
     }
 
-    .logo {
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       white-space: nowrap;
     }
 
-    .logo span {
-      color: #f97316;
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      border: 1px solid rgba(248, 250, 252, 0.09);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(249, 115, 22, 0.72), transparent 60%),
+        radial-gradient(circle at 80% 100%, #0f172a, #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #fefdfb;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.7);
+    }
+
+    .logo-text-main {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .logo-text-main span {
+      color: var(--accent);
+    }
+
+    .logo-subtitle {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
     }
 
     .nav-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 6px;
       justify-content: flex-end;
     }
 
     .nav-links a {
-      text-decoration: none;
-      color: #e5e7eb;
-      font-size: 0.9rem;
-      padding: 6px 12px;
-      border-radius: 999px;
+      position: relative;
+      font-size: 0.85rem;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
       border: 1px solid transparent;
-      transition: background 0.15s, border-color 0.15s;
+      color: var(--text-soft);
+      background: transparent;
+      transition:
+        background 0.16s ease,
+        border-color 0.16s ease,
+        color 0.16s ease,
+        transform 0.16s ease;
     }
 
     .nav-links a:hover {
-      background: #111827;
-      border-color: #1f2937;
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(55, 65, 81, 0.9);
+      transform: translateY(-1px);
     }
 
     .nav-links a.active {
-      background: #f97316;
+      background: var(--accent);
       color: #020617;
+      border-color: var(--accent);
       font-weight: 600;
-      border-color: #f97316;
+      box-shadow: 0 10px 24px rgba(249, 115, 22, 0.55);
+    }
+
+    .nav-cta {
+      display: none;
     }
 
     main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 24px 18px 40px;
+      margin-top: 18px;
     }
 
     section {
-      padding: 40px 0;
-      border-bottom: 1px solid #111827;
+      padding: 42px 0;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.8);
     }
 
     section:last-of-type {
@@ -95,83 +182,227 @@
       padding-bottom: 10px;
     }
 
-    h1, h2 {
+    /* -----------------------
+       Typography
+    ------------------------ */
+
+    h1,
+    h2,
+    h3 {
       font-weight: 700;
-      margin-bottom: 10px;
+      color: #f9fafb;
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: clamp(2.1rem, 2.6vw + 1.6rem, 2.85rem);
+      line-height: 1.12;
+      margin-bottom: 14px;
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: clamp(1.6rem, 1.3vw + 1.3rem, 2rem);
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
     }
 
     p {
-      font-size: 0.96rem;
-      line-height: 1.6;
-      color: #d1d5db;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: var(--text-soft);
       margin-bottom: 10px;
     }
 
     ul {
-      margin-left: 18px;
-      margin-top: 6px;
+      margin: 10px 0 12px 20px;
       font-size: 0.95rem;
-      color: #d1d5db;
+      color: var(--text-soft);
+      line-height: 1.6;
     }
 
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
-      gap: 22px;
+    li + li {
+      margin-top: 6px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
       align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--accent);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      margin-bottom: 14px;
     }
 
-    .hero-text p {
-      margin-bottom: 10px;
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.25);
     }
+
+    /* -----------------------
+       Buttons / CTAs
+    ------------------------ */
 
     .hero-cta {
-      margin-top: 14px;
+      margin-top: 18px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .btn-primary, .btn-outline {
-      border-radius: 999px;
-      padding: 8px 14px;
+    .btn-primary,
+    .btn-outline {
+      border-radius: var(--radius-pill);
+      padding: 10px 18px;
       font-size: 0.9rem;
       cursor: pointer;
       text-decoration: none;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: 1px solid transparent;
+      transition:
+        background 0.16s ease,
+        border-color 0.16s ease,
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        color 0.16s ease;
+      white-space: nowrap;
     }
 
     .btn-primary {
-      background: #f97316;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
       color: #020617;
-      border: none;
       font-weight: 600;
+      border-color: transparent;
+      box-shadow: 0 18px 40px rgba(249, 115, 22, 0.5);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 50px rgba(249, 115, 22, 0.6);
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
     }
 
     .btn-outline {
-      background: transparent;
-      color: #e5e7eb;
-      border: 1px solid #4b5563;
+      background: var(--pill-bg);
+      color: var(--text-soft);
+      border-color: rgba(148, 163, 184, 0.6);
     }
 
+    .btn-outline:hover {
+      background: rgba(15, 23, 42, 1);
+      border-color: rgba(209, 213, 219, 0.9);
+      transform: translateY(-1px);
+    }
+
+    .btn-pill-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    /* -----------------------
+       Hero
+    ------------------------ */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.3fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-left {
+      background: linear-gradient(
+          140deg,
+          rgba(15, 23, 42, 0.95),
+          rgba(15, 23, 42, 0.92)
+        ),
+        radial-gradient(circle at top left, rgba(249, 115, 22, 0.14), transparent 60%);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(31, 41, 55, 0.96);
+      padding: 22px 22px 20px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(249, 115, 22, 0.1), transparent 60%),
+        radial-gradient(circle at bottom left, rgba(15, 23, 42, 0.9), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .hero-meta-pill {
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .hero-meta-divider {
+      width: 1px;
+      height: 16px;
+      background: rgba(55, 65, 81, 0.9);
+    }
+
+    .hero-bottom-note {
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      max-width: 460px;
+    }
+
+    /* Right side hero card */
+
     .hero-image-wrapper {
-      background: #020617;
-      border-radius: 18px;
-      border: 1px solid #1f2937;
+      background: radial-gradient(circle at top, #020617, #020617 45%, #020617 100%);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(31, 41, 55, 0.96);
       overflow: hidden;
       position: relative;
-      min-height: 230px;
+      min-height: 260px;
       display: flex;
       align-items: stretch;
       justify-content: center;
+      box-shadow: var(--shadow-soft);
+      isolation: isolate;
     }
 
     .hero-image {
@@ -180,104 +411,156 @@
       background-size: cover;
       background-position: center;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-end;
+      justify-content: stretch;
       color: #9ca3af;
-      font-size: 0.9rem;
-      padding: 16px;
-      text-align: center;
+      font-size: 0.86rem;
+      padding: 18px 18px 16px;
+      text-align: left;
+      position: relative;
+      z-index: 1;
     }
 
-    /* Replace this with a real photo file later, e.g. /img/veteran-hero.jpg */
+    /* Use your actual image here */
     .hero-image.placeholder {
-      background-image: linear-gradient(135deg, #111827, #020617);
-      border-radius: 18px;
+      background-image:
+        linear-gradient(135deg, #020617, #020617),
+        url('/img/veteran-hero.jpg');
+      background-blend-mode: overlay;
     }
 
     .hero-image::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 20% 20%, #1e293b66, transparent 55%);
+      background:
+        linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent 45%),
+        radial-gradient(circle at 18% 0%, rgba(249, 115, 22, 0.16), transparent 60%);
       pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-label-chip {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: rgba(15, 23, 42, 0.86);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-label-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.35);
     }
 
     .hero-caption {
       position: absolute;
-      bottom: 10px;
-      left: 14px;
-      right: 14px;
+      bottom: 12px;
+      left: 16px;
+      right: 16px;
       font-size: 0.78rem;
-      color: #9ca3af;
-      text-shadow: 0 1px 2px #000;
+      color: #d1d5db;
+      text-shadow: 0 1px 3px #000;
+      z-index: 2;
+    }
+
+    /* -----------------------
+       Shared Card Layouts
+    ------------------------ */
+
+    .section-header {
+      max-width: 680px;
+      margin-bottom: 14px;
     }
 
     .section-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 18px;
-      margin-top: 12px;
+      margin-top: 14px;
     }
 
     .card {
-      background: #020617;
-      border-radius: 12px;
-      border: 1px solid #1f2937;
-      padding: 14px;
+      background: linear-gradient(
+        145deg,
+        rgba(15, 23, 42, 0.98),
+        rgba(15, 23, 42, 0.96)
+      );
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(30, 64, 175, 0.5);
+      padding: 14px 14px 13px;
       font-size: 0.9rem;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top right,
+        rgba(37, 99, 235, 0.18),
+        transparent 60%
+      );
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 1;
     }
 
     .card h3 {
-      margin-bottom: 6px;
       font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .card-tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(248, 250, 252, 0.7);
+      opacity: 0.8;
     }
 
     .small-note {
       font-size: 0.8rem;
-      color: #9ca3af;
-    }
-
-    .application-box {
-      margin-top: 10px;
-      background: #020617;
-      border-radius: 12px;
-      border: 1px solid #1f2937;
-      padding: 14px;
-      font-size: 0.9rem;
-    }
-
-    .app-field-label {
-      font-size: 0.85rem;
-      color: #cbd5f5;
-      margin-top: 6px;
-      margin-bottom: 2px;
-    }
-
-    .app-field {
-      width: 100%;
-      padding: 6px 8px;
-      border-radius: 8px;
-      border: 1px solid #374151;
-      background: #020617;
-      color: #e5e7eb;
-      font-size: 0.88rem;
-      margin-bottom: 6px;
-    }
-
-    .app-field::placeholder {
-      color: #6b7280;
-    }
-
-    footer {
-      border-top: 1px solid #1f2937;
-      padding: 10px 18px 16px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #9ca3af;
+      color: var(--text-muted);
     }
 
     .inline-link {
-      color: #f97316;
+      color: var(--accent);
       text-decoration: none;
     }
 
@@ -285,16 +568,158 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 760px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
+    /* -----------------------
+       Application Box / Form
+    ------------------------ */
+
+    .application-box {
+      margin-top: 12px;
+      background: linear-gradient(
+        150deg,
+        rgba(15, 23, 42, 0.98),
+        rgba(15, 23, 42, 0.96)
+      );
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .application-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(249, 115, 22, 0.12), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.19), transparent 60%);
+      opacity: 0.9;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .application-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .app-intro {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .app-field-label {
+      font-size: 0.82rem;
+      color: #cbd5f5;
+      margin-top: 6px;
+      margin-bottom: 3px;
+    }
+
+    .app-field,
+    textarea.app-field {
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 9px;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: rgba(15, 23, 42, 0.98);
+      color: var(--text-main);
+      font-size: 0.86rem;
+      margin-bottom: 6px;
+      outline: none;
+      transition:
+        border-color 0.14s ease,
+        box-shadow 0.14s ease,
+        background 0.14s ease;
+      resize: vertical;
+      min-height: 0;
+    }
+
+    .app-field::placeholder {
+      color: #6b7280;
+    }
+
+    .app-field:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.8);
+      background: #020617;
+    }
+
+    .form-footer-note {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* -----------------------
+       Footer
+    ------------------------ */
+
+    footer {
+      border-top: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 14px 20px 20px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      margin-top: 16px;
+    }
+
+    /* -----------------------
+       Responsive
+    ------------------------ */
+
+    @media (max-width: 900px) {
       .nav {
         flex-direction: column;
         align-items: flex-start;
+        height: auto;
+        gap: 10px;
+        padding-bottom: 12px;
       }
+
       .nav-links {
+        width: 100%;
         justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left,
+      .hero-image-wrapper {
+        border-radius: 18px;
+      }
+
+      .application-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page-shell {
+        padding: 0 14px 24px;
+      }
+
+      .hero-left {
+        padding: 18px 16px 16px;
+      }
+
+      section {
+        padding: 34px 0;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+        padding: 7px 12px;
       }
     }
   </style>
@@ -302,7 +727,13 @@
 <body>
 <header>
   <div class="nav">
-    <div class="logo">Our <span>Heroes</span></div>
+    <div class="logo-lockup">
+      <div class="logo-mark">OH</div>
+      <div>
+        <div class="logo-text-main">Our <span>Heroes</span></div>
+        <div class="logo-subtitle">Standing with combat veterans</div>
+      </div>
+    </div>
     <nav class="nav-links">
       <a href="#who-we-are" class="active">Who We Are</a>
       <a href="#veterans-we-serve">Veterans We Serve</a>
@@ -312,194 +743,270 @@
   </div>
 </header>
 
-<main>
-  <!-- HERO / WHO WE ARE -->
-  <section id="who-we-are">
-    <div class="hero">
-      <div class="hero-text">
-        <h1>Helping combat veterans fight their hardest battle: coming home.</h1>
-        <p>
-          Our Heroes exists for one mission: to walk beside combat veterans as they
-          fight through the invisible war that starts <em>after</em> the deployments end.
-          We know the cost of service isn’t paid off when the uniform comes off. For many,
-          that’s when the hardest chapter begins.
-        </p>
-        <p>
-          My name is Dominic King. I served nine years in the United States Marine Corps and
-          deployed four times in support of Operation Enduring Freedom. The veteran I am trying
-          to help is the man I used to be.
-        </p>
-        <p>
-          When I came home, I didn’t “fit” anywhere. Rage with no clear target. A constant
-          pull toward self-destruction. I turned to alcohol and substances not because I wanted
-          to party, but because I wanted to go numb. Starting over in the civilian world after
-          years in combat felt like being dropped on a different planet and told, “Figure it out.”
-        </p>
-        <p>
-          By the grace of God, some hard decisions, and a new sense of direction, my story
-          didn’t end there. I found my footing. I built a family I adore. I rebuilt a version
-          of myself that I can be proud of. But it was almost an accident that I made it back.
-        </p>
-        <p>
-          That is why Our Heroes exists — so that “happenchance” isn’t the plan. We want to
-          call out the elephant in the room: substance abuse, isolation, the feeling of being
-          misunderstood, the fear of starting at the bottom again. And then we want to do
-          something about it.
-        </p>
-        <div class="hero-cta">
-          <a href="#application-for-help" class="btn-primary">I Need Help</a>
-          <a href="#affiliate-partners" class="btn-outline">I Want to Support</a>
+<div class="page-shell">
+  <main>
+    <!-- HERO / WHO WE ARE -->
+    <section id="who-we-are">
+      <div class="hero">
+        <div class="hero-left">
+          <div class="hero-content">
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              OUR MISSION
+            </div>
+            <h1>Helping combat veterans fight their hardest battle: coming home.</h1>
+            <p>
+              Our Heroes exists for one mission: to walk beside combat veterans as they
+              fight through the invisible war that starts <em>after</em> the deployments end.
+              We know the cost of service isn’t paid off when the uniform comes off. For many,
+              that’s when the hardest chapter begins.
+            </p>
+            <p>
+              My name is Dominic King. I served nine years in the United States Marine Corps and
+              deployed four times in support of Operation Enduring Freedom. The veteran I am trying
+              to help is the man I used to be.
+            </p>
+            <p>
+              When I came home, I didn’t “fit” anywhere. Rage with no clear target. A constant
+              pull toward self-destruction. I turned to alcohol and substances not because I wanted
+              to party, but because I wanted to go numb. Starting over in the civilian world after
+              years in combat felt like being dropped on a different planet and told, “Figure it out.”
+            </p>
+            <p>
+              By the grace of God, some hard decisions, and a new sense of direction, my story
+              didn’t end there. I found my footing. I built a family I adore. I rebuilt a version
+              of myself that I can be proud of. But it was almost an accident that I made it back.
+            </p>
+            <p>
+              That is why Our Heroes exists — so that “happenchance” isn’t the plan. We want to
+              call out the elephant in the room: substance abuse, isolation, the feeling of being
+              misunderstood, the fear of starting at the bottom again. And then we want to do
+              something about it.
+            </p>
+            <div class="hero-cta">
+              <a href="#application-for-help" class="btn-primary">
+                I Need Help
+              </a>
+              <a href="#affiliate-partners" class="btn-outline">
+                <span class="btn-pill-label">For donors & partners</span>
+                <span> I Want to Support</span>
+              </a>
+            </div>
+
+            <div class="hero-meta">
+              <div class="hero-meta-pill">Founded by a combat veteran</div>
+              <div class="hero-meta-divider"></div>
+              <div>Focused on post-deployment transition, identity, and recovery.</div>
+            </div>
+            <p class="hero-bottom-note">
+              The story you just read isn’t theory. It’s lived experience. Our Heroes is built so
+              that more veterans don’t have to survive their healing “by accident”.
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-image-wrapper">
+          <!-- Replace the placeholder background with a real photo file when you have one -->
+          <div class="hero-image placeholder" style="background-image: url('/img/veteran-hero.jpg');">
+            <div class="hero-label-chip">
+              <span class="hero-label-dot"></span>
+              Combat Veteran–Led
+            </div>
+          </div>
+          <div class="hero-caption">
+            From the battlefield to the living room, the fight doesn’t stop.
+            Our Heroes is here for that second battle.
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="hero-image-wrapper">
-        <!-- Replace the placeholder background with a real photo file when you have one -->
-        <div class="hero-image placeholder" style="background-image: url('/img/veteran-hero.jpg');">
-          Image: a combat veteran standing in partial shadow, wearing a worn
-          field jacket, American flag muted in the background — focused, tired,
-          and still very much in the fight.
+    <!-- VETERANS WE SERVE -->
+    <section id="veterans-we-serve">
+      <div class="section-header">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          WHO WE WALK BESIDE
         </div>
-        <div class="hero-caption">
-          From the battlefield to the living room, the fight doesn’t stop.
-          Our Heroes is here for that second battle.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VETERANS WE SERVE -->
-  <section id="veterans-we-serve">
-    <h2>Veterans We Serve</h2>
-    <p>
-      Our focus is on combat veterans who feel like the world they returned to
-      doesn’t match the world they left. If any of this sounds familiar, you are
-      exactly who we exist to serve:
-    </p>
-    <ul>
-      <li>You feel like you don’t quite fit anywhere — not at work, not in crowds, sometimes not even at home.</li>
-      <li>You’ve leaned on alcohol or substances just to slow your thoughts down or feel something different.</li>
-      <li>Going “back to the bottom” in a civilian job feels insulting after what you’ve already done.</li>
-      <li>You’re carrying things you don’t know how to explain, and you’re tired of people saying, “Thank you for your service,” but not really understanding you.</li>
-      <li>You want a path forward that doesn’t erase your military background, but builds on it.</li>
-    </ul>
-    <p>
-      We don’t treat you like a problem that needs to be fixed. We see you as a
-      leader who has already proven what you’re capable of — you just need the
-      right direction, the right support, and a team that understands the terrain.
-    </p>
-
-    <div class="section-grid">
-      <div class="card">
-        <h3>Re-entry & Employment Coaching</h3>
+        <h2>Veterans We Serve</h2>
         <p>
-          Help translating your MOS and combat experience into real-world skills,
-          building a new career path, and navigating the humility of starting over
-          without losing your identity.
+          Our focus is on combat veterans who feel like the world they returned to
+          doesn’t match the world they left. If any of this sounds familiar, you are
+          exactly who we exist to serve:
         </p>
       </div>
-      <div class="card">
-        <h3>Substance & Coping Support</h3>
-        <p>
-          Guidance toward healthy resources for dealing with substance abuse and
-          destructive habits — not with shame, but with honesty and a plan.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Connection & Community</h3>
-        <p>
-          Linking veterans with others who get it — people who have walked the
-          same road, felt the same anger, and decided they were not going to let
-          it write the ending of their story.
-        </p>
-      </div>
-    </div>
-  </section>
 
-  <!-- APPLICATION FOR HELP -->
-  <section id="application-for-help">
-    <h2>Application for Help</h2>
-    <p>
-      If you’re reading this and thinking, “That sounds like me,” you are exactly
-      the person this foundation was built for. Reaching out is not weakness —
-      it is the same courage you showed downrange, pointed in a new direction.
-    </p>
-    <p>
-      This simple form is here so we can start a conversation. We’re not asking
-      you to spill everything on day one. Just give us a way to reach you and a
-      glimpse of what you’re facing.
-    </p>
-
-    <div class="application-box">
-      <!-- NOTE:
-           This is a static site. Change the action attribute to your real
-           form handler later (Formspree, a backend endpoint, etc.).
-      -->
-      <form action="mailto:info@our-heroes.org" method="post" enctype="text/plain">
-        <label class="app-field-label" for="name">Name</label>
-        <input id="name" name="name" class="app-field" placeholder="First and last name" />
-
-        <label class="app-field-label" for="email">Email</label>
-        <input id="email" name="email" class="app-field" placeholder="you@example.com" />
-
-        <label class="app-field-label" for="phone">Phone (optional)</label>
-        <input id="phone" name="phone" class="app-field" placeholder="Best number to reach you" />
-
-        <label class="app-field-label" for="service">Branch & years of service</label>
-        <input id="service" name="service" class="app-field" placeholder="e.g., USMC, 2005–2014, OEF deployments" />
-
-        <label class="app-field-label" for="needs">What are you facing right now?</label>
-        <textarea id="needs" name="needs" rows="4" class="app-field" placeholder="Share as much or as little as you’re comfortable with on day one."></textarea>
-
-        <button type="submit" class="btn-primary" style="margin-top:8px;">
-          Submit Application
-        </button>
-      </form>
-      <p class="small-note" style="margin-top:8px;">
-        If forms aren’t your thing, you can email us directly at
-        <a class="inline-link" href="mailto:info@our-heroes.org">info@our-heroes.org</a>.
+      <ul>
+        <li>You feel like you don’t quite fit anywhere — not at work, not in crowds, sometimes not even at home.</li>
+        <li>You’ve leaned on alcohol or substances just to slow your thoughts down or feel something different.</li>
+        <li>Going “back to the bottom” in a civilian job feels insulting after what you’ve already done.</li>
+        <li>You’re carrying things you don’t know how to explain, and you’re tired of people saying, “Thank you for your service,” but not really understanding you.</li>
+        <li>You want a path forward that doesn’t erase your military background, but builds on it.</li>
+      </ul>
+      <p>
+        We don’t treat you like a problem that needs to be fixed. We see you as a
+        leader who has already proven what you’re capable of — you just need the
+        right direction, the right support, and a team that understands the terrain.
       </p>
-    </div>
-  </section>
 
-  <!-- AFFILIATE PARTNERS -->
-  <section id="affiliate-partners">
-    <h2>Affiliate Partners</h2>
-    <p>
-      Our Heroes is built on partnership. We believe the best way to serve veterans
-      is to connect people who care with organizations that are willing to act.
-    </p>
-    <div class="section-grid">
-      <div class="card">
-        <h3>Combatant Armory</h3>
+      <div class="section-grid">
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            PROGRAM
+          </div>
+          <h3>Re-entry & Employment Coaching</h3>
+          <p>
+            Help translating your MOS and combat experience into real-world skills,
+            building a new career path, and navigating the humility of starting over
+            without losing your identity.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            SUPPORT
+          </div>
+          <h3>Substance & Coping Support</h3>
+          <p>
+            Guidance toward healthy resources for dealing with substance abuse and
+            destructive habits — not with shame, but with honesty and a plan.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            COMMUNITY
+          </div>
+          <h3>Connection & Community</h3>
+          <p>
+            Linking veterans with others who get it — people who have walked the
+            same road, felt the same anger, and decided they were not going to let
+            it write the ending of their story.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLICATION FOR HELP -->
+    <section id="application-for-help">
+      <div class="section-header">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          TAKE THE FIRST STEP
+        </div>
+        <h2>Application for Help</h2>
         <p>
-          Combatant Armory proudly stands behind Our Heroes as an affiliate partner,
-          helping raise awareness and financial support for the mission. A portion
-          of select proceeds and promotions are dedicated to supporting veterans and
-          their families through this foundation.
+          If you’re reading this and thinking, “That sounds like me,” you are exactly
+          the person this foundation was built for. Reaching out is not weakness —
+          it is the same courage you showed downrange, pointed in a new direction.
         </p>
-        <p class="small-note">
-          Learn more at
-          <a href="https://combatantarmory.com" target="_blank" rel="noopener noreferrer" class="inline-link">
-            combatantarmory.com
-          </a>.
+        <p>
+          This simple form is here so we can start a conversation. We’re not asking
+          you to spill everything on day one. Just give us a way to reach you and a
+          glimpse of what you’re facing.
         </p>
       </div>
-      <div class="card">
-        <h3>Future Partners</h3>
+
+      <div class="application-box">
+        <div class="application-inner">
+          <div class="app-intro">
+            <!-- NOTE:
+                 This is a static site. Change the action attribute to your real
+                 form handler later (Formspree, a backend endpoint, etc.).
+            -->
+            <form action="mailto:info@our-heroes.org" method="post" enctype="text/plain">
+              <label class="app-field-label" for="name">Name</label>
+              <input id="name" name="name" class="app-field" placeholder="First and last name" />
+
+              <label class="app-field-label" for="email">Email</label>
+              <input id="email" name="email" class="app-field" placeholder="you@example.com" />
+
+              <label class="app-field-label" for="phone">Phone (optional)</label>
+              <input id="phone" name="phone" class="app-field" placeholder="Best number to reach you" />
+
+              <label class="app-field-label" for="service">Branch & years of service</label>
+              <input id="service" name="service" class="app-field" placeholder="e.g., USMC, 2005–2014, OEF deployments" />
+
+              <label class="app-field-label" for="needs">What are you facing right now?</label>
+              <textarea id="needs" name="needs" rows="4" class="app-field" placeholder="Share as much or as little as you’re comfortable with on day one."></textarea>
+
+              <button type="submit" class="btn-primary" style="margin-top:8px;">
+                Submit Application
+              </button>
+            </form>
+            <p class="form-footer-note">
+              If forms aren’t your thing, you can email us directly at
+              <a class="inline-link" href="mailto:info@our-heroes.org">info@our-heroes.org</a>.
+            </p>
+          </div>
+          <div>
+            <p class="small-note">
+              Everything you share here is treated with respect. We understand that
+              for many combat veterans, asking for help feels risky — even dangerous.
+              You are not signing up to be “fixed.” You’re opening a door to walk
+              through at your pace, with people who understand where you’ve been.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AFFILIATE PARTNERS -->
+    <section id="affiliate-partners">
+      <div class="section-header">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          PARTNERS IN THE FIGHT
+        </div>
+        <h2>Affiliate Partners</h2>
         <p>
-          We are actively seeking businesses, churches, community groups, and individuals
-          who want to stand in the gap for combat veterans. If you’d like to explore an
-          affiliate partnership, sponsorship, or joint project, we’d love to talk.
-        </p>
-        <p class="small-note">
-          Email us at
-          <a class="inline-link" href="mailto:partners@our-heroes.org">partners@our-heroes.org</a>
-          to start the conversation.
+          Our Heroes is built on partnership. We believe the best way to serve veterans
+          is to connect people who care with organizations that are willing to act.
         </p>
       </div>
-    </div>
-  </section>
-</main>
+
+      <div class="section-grid">
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            CURRENT PARTNER
+          </div>
+          <h3>Combatant Armory</h3>
+          <p>
+            Combatant Armory proudly stands behind Our Heroes as an affiliate partner,
+            helping raise awareness and financial support for the mission. A portion
+            of select proceeds and promotions are dedicated to supporting veterans and
+            their families through this foundation.
+          </p>
+          <p class="small-note">
+            Learn more at
+            <a href="https://combatantarmory.com" target="_blank" rel="noopener noreferrer" class="inline-link">
+              combatantarmory.com
+            </a>.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            FUTURE PARTNERS
+          </div>
+          <h3>Future Partners</h3>
+          <p>
+            We are actively seeking businesses, churches, community groups, and individuals
+            who want to stand in the gap for combat veterans. If you’d like to explore an
+            affiliate partnership, sponsorship, or joint project, we’d love to talk.
+          </p>
+          <p class="small-note">
+            Email us at
+            <a class="inline-link" href="mailto:partners@our-heroes.org">partners@our-heroes.org</a>
+            to start the conversation.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
 
 <footer>
   © <span id="year"></span> Our Heroes. All rights reserved.
